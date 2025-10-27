@@ -38,8 +38,8 @@ public class CustomerRepository {
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Bob Jonhson", "Profesor", 42, "ASIX");
 	}
 	
-	public void createCust() {
-		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Set Catalan", "Estudiant", 24, "DAM");
+	public void createCust(Customer cust) {
+		/*jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Set Catalan", "Estudiant", 24, "DAM");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Christian Lloveras", "Estudiant", 25, "DAW");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Aaron Talledo", "Estudiant", 22, "ASIX");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Javier Crespo", "Estudiant", 20, "DAM");
@@ -48,7 +48,9 @@ public class CustomerRepository {
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Jose Romero", "Estudiant", 28, "DAM");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Adrian Garcia", "Estudiant", 32, "DAW");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Benjamin Herrero", "Estudiant", 22, "ASIX");
-		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Juan Alberto", "Estudiant", 24, "DAM");
+		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", "Juan Alberto", "Estudiant", 24, "DAM");*/
+		
+		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course) VALUES(?, ?, ?, ?)", cust.getName(), cust.getDescription(), cust.getAge(), cust.getCourse());
 	}
 	
 	public List<Customer> findAll(){
