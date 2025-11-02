@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Set", 
+		"description": "Estudiant", 
+		"age": 20, 
+		"course": "DAM",
+		"password": "1234"
+	},
+	{
+		"name": "Christian", 
+		"description": "Estudiant", 
+		"age": 22, 
+		"course": "DAW",
+		"password": "abcd"
+	},
+	{
+		"name": "Aaron", 
+		"description": "Estudiant", 
+		"age": 21, 
+		"course": "ASIX",
+		"password": "1a2b"
+	}
+]

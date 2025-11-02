@@ -7,6 +7,7 @@ public class Customer {
 	private String name, description;
 	private int age;
 	private String course;
+	private String password;
 	private Timestamp dataCreated;
 	private Timestamp dataUpdated;
 	
@@ -14,12 +15,13 @@ public class Customer {
 		
 	}
 
-	public Customer(Long id, String name, String description, int age, String course, Timestamp dataCreated, Timestamp dataUpdated) {
+	public Customer(Long id, String name, String description, int age, String course, String password, Timestamp dataCreated, Timestamp dataUpdated) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.age = age;
 		this.course = course;
+		this.password = password;
 		this.dataCreated = dataCreated;
 		this.dataUpdated = dataUpdated;
 	}
@@ -62,6 +64,14 @@ public class Customer {
 
 	public void setCourse(String course) {
 		this.course = course;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Timestamp getDataCreated() {

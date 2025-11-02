@@ -32,9 +32,11 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customer")
-	public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
-		customerRep.createCust(customer);
-		return ResponseEntity.ok("Customer  creat: " + customer.getName());
+	public ResponseEntity<String> createCustomer(@RequestBody List<Customer> customers) {
+		for(Customer customer: customers) {
+			customerRep.createCust(customer);
+		}
+		return ResponseEntity.ok("Customers creats correctament");
 	}
 	
 	@GetMapping("/findAllCustomers")
