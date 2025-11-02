@@ -40,7 +40,8 @@ public class CustomerRepository {
 	}
 	
 	public void createCust(Customer cust) {
-		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", cust.getName(), cust.getDescription(), cust.getAge(), cust.getCourse(), cust.getPassword());
+		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", 
+						cust.getName(), cust.getDescription(), cust.getAge(), cust.getCourse(), cust.getPassword());
 	}
 	
 	public List<Customer> findAll(){
@@ -51,12 +52,13 @@ public class CustomerRepository {
 		return jdbcTemp.queryForObject("SELECT * FROM customers WHERE id=?", new Object[]{id}, new CustomerRowMapper());
 	}
 	
-	public void replaceCust(int id) {
-		jdbcTemp.update("UPDATE customers SET cust_name = ?, cust_description = ?, age = ?, course = ?, passwd = ? WHERE id = ?", "Actualitzat", "Actualizat", 0, "Actualtzat", "Actualizat", id);
+	public void replaceCust(int id, Customer newCust) {
+		jdbcTemp.update("UPDATE customers SET cust_name = ?, cust_description = ?, age = ?, course = ?, passwd = ? WHERE id = ?", 
+						newCust.getName(), newCust.getDescription(), newCust.getAge() , newCust.getCourse(), newCust.getPassword(), id);
 	}
 	
-	public void updateCust(int id) {
-		jdbcTemp.update("UPDATE customers SET cust_name = ?, age = ? WHERE id = ?", "Nom", 0, id);
+	public void updateCust(int id, int age) {
+		jdbcTemp.update("UPDATE customers SET age = ? WHERE id = ?", age, id);
 	}
 	
 	public void deleteCust(int id) {
