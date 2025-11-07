@@ -27,17 +27,18 @@ public class CustomerRepository {
 			customer.setAge(rs.getInt("age"));
 			customer.setCourse(rs.getString("course"));
 			customer.setPassword(rs.getString("passwd"));
+			customer.setImage_path(rs.getString("image_path"));
 			customer.setDataCreated(rs.getTimestamp("dataCreated"));
 			customer.setDataUpdated(rs.getTimestamp("dataUpdated"));
 			return customer;
 		}
 	}
 	
-	public void initDB() {
+	/*public void initDB() {
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", "Jhon Doe", "Profesor", 54, "DAM", "12346789");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", "Jane Smith", "Profesor", 35, "DAW", "abcdwxyz");
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", "Bob Jonhson", "Profesor", 42, "ASIX", "1a2b8y9z");
-	}
+	}*/
 	
 	public void createCust(Customer cust) {
 		jdbcTemp.update("INSERT INTO customers (cust_name, cust_description, age, course, passwd) VALUES(?, ?, ?, ?, ?)", 
@@ -48,6 +49,7 @@ public class CustomerRepository {
 		return jdbcTemp.query("SELECT * FROM customers", new CustomerRowMapper());
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Customer findById(int id) {
 		return jdbcTemp.queryForObject("SELECT * FROM customers WHERE id=?", new Object[]{id}, new CustomerRowMapper());
 	}

@@ -17,41 +17,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ra2.mysql.model.Customer;
-import com.ra2.mysql.repository.CustomerRepository;
+import com.ra2.mysql.services.CustomerServices;
 
 @RestController
 @RequestMapping("/jdbctemplate")
 public class CustomerController {
 
 	@Autowired
-	private CustomerRepository customerRep;
+	private CustomerServices customerServ;
 	
-	@PostMapping("/initdataDB")
+	/*@PostMapping("/initdataDB")
 	public String initdataDB() {
-		/*customerRep.createTableDB();*/
+		customerRep.createTableDB();
 		customerRep.initDB();
 		return "Taula emplenada correctament";
-	}
+	}*/
 	
 	@PostMapping("/customer")
 	public ResponseEntity<String> createCustomer(@RequestBody List<Customer> customers) {
-		for(Customer customer: customers) {
-			customerRep.createCust(customer);
-		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Customers creats correctament");
+		return ResponseEntity.status(HttpStatus.CREATED).body(customerServ.createCustomers(customers));
 	}
 	
 	@GetMapping("/customer")
 	public ResponseEntity<List<Customer>> findAllCust(){
 		List<Customer> customers = null;
-		customers = customerRep.findAll();
+		customers = customerServ.findAll();
 		return ResponseEntity.ok(customers);
 	}
 	
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Customer> findById(@PathVariable int id) {
 		Customer cust = null;
-		List<Customer> customers = customerRep.findAll();
+		List<Customer> customers = customerServ.findAll();
 		Long idCust = (long) 0;
 		for (Customer customer: customers) {
 			if (customer.getId() < idCust) {
@@ -60,26 +57,26 @@ public class CustomerController {
 			idCust = customer.getId();
 		}
 		if (id <= idCust && id > 0) {
-			cust = customerRep.findById(id);
+			cust = customerServ.findById(id);
 		}
 		return ResponseEntity.ok(cust);
 	}
 	
 	@PutMapping("/customer/{id}")
 	public ResponseEntity<Customer> replaceCust(@PathVariable int id, @RequestBody Customer newCust) {
-		customerRep.replaceCust(id, newCust);
-		return ResponseEntity.ok(customerRep.findById(id));
+		customerServ.replaceCust(id, newCust);
+		return ResponseEntity.ok(customerServ.findById(id));
 	}
 	
 	@PatchMapping("/customer/{id}/age")
 	public ResponseEntity<Customer> updateCust(@PathVariable int id, @RequestParam int age) {
-		customerRep.updateCust(id, age);
-		return ResponseEntity.ok(customerRep.findById(id));
+		customerServ.updateCust(id, age);
+		return ResponseEntity.ok(customerServ.findById(id));
 	}
 	
 	@DeleteMapping("/customer/{id}")
 	public String deleteCust(@PathVariable int id) {
-		customerRep.deleteCust(id);
+		customerServ.deleteCust(id);
 		return "Customer eliminat correctament";
 	}
 }
