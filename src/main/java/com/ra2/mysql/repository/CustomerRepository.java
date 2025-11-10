@@ -50,20 +50,24 @@ public class CustomerRepository {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public Customer findById(int id) {
+	public Customer findById(Long id) {
 		return jdbcTemp.queryForObject("SELECT * FROM customers WHERE id=?", new Object[]{id}, new CustomerRowMapper());
 	}
 	
-	public void replaceCust(int id, Customer newCust) {
+	public void replaceCust(Long id, Customer newCust) {
 		jdbcTemp.update("UPDATE customers SET cust_name = ?, cust_description = ?, age = ?, course = ?, passwd = ? WHERE id = ?", 
 						newCust.getName(), newCust.getDescription(), newCust.getAge() , newCust.getCourse(), newCust.getPassword(), id);
 	}
 	
-	public void updateCust(int id, int age) {
+	public void updateCust(Long id, int age) {
 		jdbcTemp.update("UPDATE customers SET age = ? WHERE id = ?", age, id);
 	}
 	
-	public void deleteCust(int id) {
+	public void deleteCust(Long id) {
 		jdbcTemp.update("DELETE FROM customers WHERE id=?", id);
+	}
+
+	public void saveCustomerImage(Long id, String image_path) {
+		jdbcTemp.update("UPDATE customers SET image_path = ? WHERE id = ?", image_path, id);
 	}
 }
